@@ -1,0 +1,8 @@
+namespace csharp openutils
+namespace php openutils
+
+service CsvParser  {
+
+   /** Get a string content and parse them as a dictionary **/
+   map<string, string> parse(1: string content);
+}
