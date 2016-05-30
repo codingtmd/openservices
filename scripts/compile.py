@@ -29,6 +29,19 @@ print "client_languages", client_languages
 
 # compile thrift code for server side
 thrift_path, thrift_name = os.path.split(input_source)
+print "delete old code "
+   # enter the directory like this:
+with contextmanager.cd(thrift_path):
+   # we are in ~/Library
+   command = "rm -rf gen-*"
+   print "execute:", command
+   subprocess.call(command, shell=True)
+
+# outside the context manager we are back wherever we started.
+
+
+# compile thrift code for server side
+thrift_path, thrift_name = os.path.split(input_source)
 print "start to compile server side ", thrift_name, "under", thrift_path
    # enter the directory like this:
 with contextmanager.cd(thrift_path):
@@ -50,5 +63,13 @@ for client in clients:
        command = "thrift --gen " + client + " " + thrift_name
        print "execute:", command
        subprocess.call(command, shell=True)
+
+# copy server host class to the package
+if (server_language == "php:server") :
+    # we are in ~/Library
+    command = "cp ./phptemplate/* " + thrift_path
+    print "execute:", command
+    subprocess.call(command, shell=True)
+
 
 print "done"
