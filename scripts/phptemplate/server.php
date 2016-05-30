@@ -25,12 +25,12 @@ if (php_sapi_name() == 'cli') {
     echo "\r\n";
 }
 
-/* add your own handler here
-
+/* add your own handler here. Begin */
+require_once(CsvParserHandler.php)
 $service = new CsvParserHandler();
-$processor = new \openutils\CsvParserProcessor($service);
+$processor = new \openservices\CsvParserProcessor($service);
 
-*/
+/* End */
 
 $transport = new TBufferedTransport(new TPhpStream(TPhpStream::MODE_R | TPhpStream::MODE_W));
 $protocol = new TBinaryProtocol($transport, true, true);
